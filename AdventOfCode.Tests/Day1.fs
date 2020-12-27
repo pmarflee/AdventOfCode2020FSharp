@@ -5,12 +5,12 @@
         open FsUnit.Xunit
         open AdventOfCode.Core
 
-        type Tests () =
+        type Tests ()=
 
-            static member Part1Data
-                with get() = [ [| [ 1721; 979; 366; 299; 675; 1456 ] :> obj; 514579 :> obj |] ]
+            static member Data with get() = [ 1721; 979; 366; 299; 675; 1456 ]
 
-            [<Theory>]
-            [<MemberData(nameof Tests.Part1Data)>]
-            member _verify.``Day 1 Part 1`` (input: int list, expected: int) =
-                Day1.calculatePart1 input |> should equal expected 
+            [<Fact>] 
+            member _.``Day 1 Part 1`` () = Day1.calculate 1 Tests.Data |> should equal 514579 
+
+            [<Fact>]
+            member _.``Day 1 Part 2`` () = Day1.calculate 2 Tests.Data |> should equal 241861950 

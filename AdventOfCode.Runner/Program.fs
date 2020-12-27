@@ -18,7 +18,8 @@ let main _ =
         printfn "%s %O (%ims)" title result elapsed
 
     // Run solutions here
-    run "Day 1 Part 1:" (readAllLines "Day1.txt" |> Array.map int) Day1.calculatePart1
+    run "Day 1 Part 1:" (readAllLines "Day1.txt" |> Array.map int) (Day1.calculate 1)
+    run "Day 1 Part 2:" (readAllLines "Day1.txt" |> Array.map int) (Day1.calculate 2)
 
     printfn ""
     printfn "Finished"

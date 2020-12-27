@@ -2,14 +2,23 @@
 
 module Day1 =
 
-    let calculatePart1 numbers = 
-        let numbers' = numbers |> Set.ofSeq
-        let tryFindPair number = 
-            let other = 2020 - number
-            if Set.contains other numbers' then
-                Some(number, other)
-            else
-                None
-        let first, second = numbers' |> Seq.pick tryFindPair 
+    let private sum = 2020
 
-        first * second
+    let private tryFindPair numbers entries = 
+        let other = sum - (List.sum entries)
+        if Set.contains other numbers then Some(other :: entries) else None
+
+    let part1 numbers = Seq.map List.singleton numbers
+
+    let part2 numbers =
+        numbers 
+        |> Seq.allPairs numbers
+        |> Seq.where (fun (a, b) -> a <> b)
+        |> Seq.map (fun (a, b) -> [a; b])
+
+    let calculate part numbers =
+        let numbers' = Set.ofSeq numbers
+        numbers' 
+        |> if part = 1 then part1 else part2 
+        |> Seq.pick (tryFindPair numbers') 
+        |> List.reduce (*)
