@@ -18,7 +18,5 @@ module Day1 =
 
     let calculate part numbers =
         let numbers' = Set.ofSeq numbers
-        numbers' 
-        |> if part = 1 then part1 else part2 
-        |> Seq.pick (tryFindPair numbers') 
-        |> List.reduce (*)
+        let partFunc = if part = 1 then part1 else part2 
+        numbers' |> partFunc |> Seq.pick (tryFindPair numbers') |> List.reduce (*) 
