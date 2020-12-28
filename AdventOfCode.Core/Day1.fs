@@ -8,9 +8,9 @@ module Day1 =
         let other = sum - (List.sum entries)
         if Set.contains other numbers then Some(other :: entries) else None
 
-    let part1 numbers = Seq.map List.singleton numbers
+    let private part1 numbers = Seq.map List.singleton numbers
 
-    let part2 numbers =
+    let private part2 numbers =
         numbers 
         |> Seq.allPairs numbers
         |> Seq.where (fun (a, b) -> a <> b)
