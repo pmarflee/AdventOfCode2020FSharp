@@ -7,21 +7,27 @@ module Day2 =
     open Farkle.Builder.Regex
 
     type PasswordPolicy = {
-        From : int;
-        To : int;
+        First : int;
+        Second : int;
         Letter : char;
     } with 
-      member this.IsValid(password : string) =
-        let result = password |> Seq.countBy id |> Seq.tryFind (fun (c, _) -> c = this.Letter)
-        match result with
-        | Some(_, count) -> count >= this.From && count <= this.To
-        | None -> false
+      member private this.IsValidPart1(password : string) =
+        let count = password |> Seq.where (fun c -> c = this.Letter) |> Seq.length
+        count >= this.First && count <= this.Second
+      member private this.HasLetterAt(password : string, index : int) = password.[index - 1] = this.Letter
+      member private this.IsValidPart2(password : string) =
+        (this.HasLetterAt(password, this.First)) <> (this.HasLetterAt(password, this.Second))
+      member this.IsValid(password : string, part : int) =
+        match part with
+        | 1 -> this.IsValidPart1(password)
+        | 2 -> this.IsValidPart2(password)
+        | _ -> invalidArg (nameof part) "Invalid part. Should be 1 or 2."
     
     type PasswordLine = {
         Policy : PasswordPolicy;
         Password : string;
     } with
-      member this.IsValid = this.Policy.IsValid(this.Password)
+      member this.IsValid(part : int) = this.Policy.IsValid(this.Password, part)
 
     type Parser () =
 
@@ -33,8 +39,8 @@ module Day2 =
         static let passwordPolicy = "PasswordPolicy" ||= [
             !@ number .>> "-" .>>. number .>>. letter =>
             (fun rangeFrom rangeTo letter -> {
-                From = rangeFrom;
-                To = rangeTo;
+                First = rangeFrom;
+                Second = rangeTo;
                 Letter = letter
             })
         ]
@@ -57,9 +63,9 @@ module Day2 =
 
     let internal parseLine input = Parser.parseLine input
 
-    let calculate input = input 
-                          |> Seq.map parseLine 
-                          |> Seq.where (fun line -> line.IsValid)
-                          |> Seq.length
+    let calculate part input = input 
+                               |> Seq.map parseLine 
+                               |> Seq.where (fun line -> line.IsValid part)
+                               |> Seq.length
 
 
