@@ -20,6 +20,7 @@ let main _ =
     // Run solutions here
     run "Day 1 Part 1:" (readAllLines "Day1.txt" |> Array.map int) (Day1.calculate 1)
     run "Day 1 Part 2:" (readAllLines "Day1.txt" |> Array.map int) (Day1.calculate 2)
+    run "Day 2 Part 1:" (readAllLines "Day2.txt") Day2.calculate
 
     printfn ""
     printfn "Finished"
