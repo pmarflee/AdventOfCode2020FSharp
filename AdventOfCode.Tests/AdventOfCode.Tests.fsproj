@@ -1,16 +1,16 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
-
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
-
     <IsPackable>false</IsPackable>
     <GenerateProgramFile>false</GenerateProgramFile>
   </PropertyGroup>
-
   <ItemGroup>
     <Compile Include="Day1.fs" />
   </ItemGroup>
-
+  <ItemGroup>
+    <None Include="paket.references" />
+  </ItemGroup>
   <ItemGroup>
     <PackageReference Include="FsUnit.xUnit" Version="4.0.2" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.9.0-preview-20201123-03" />
@@ -24,9 +24,8 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
   </ItemGroup>
-
   <ItemGroup>
     <ProjectReference Include="..\AdventOfCode.Core\AdventOfCode.Core.fsproj" />
   </ItemGroup>
-
+  <Import Project="..\.paket\Paket.Restore.targets" />
 </Project>

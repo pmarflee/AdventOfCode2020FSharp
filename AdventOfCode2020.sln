@@ -7,7 +7,12 @@ Project("{6EC3EE1D-3C4E-46DD-8F32-0CC8E7565705}") = "AdventOfCode.Runner", "Adve
 EndProject
 Project("{6EC3EE1D-3C4E-46DD-8F32-0CC8E7565705}") = "AdventOfCode.Tests", "AdventOfCode.Tests\AdventOfCode.Tests.fsproj", "{65F9467E-6C9E-4747-9600-FAB5E1597299}"
 EndProject
-Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "AdventOfCode.Core", "AdventOfCode.Core\AdventOfCode.Core.fsproj", "{85CCA459-3242-4ABD-A4DB-B0A720E14C5B}"
+Project("{6EC3EE1D-3C4E-46DD-8F32-0CC8E7565705}") = "AdventOfCode.Core", "AdventOfCode.Core\AdventOfCode.Core.fsproj", "{85CCA459-3242-4ABD-A4DB-B0A720E14C5B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "paket", "paket", "{EDCE34CC-0B54-4A68-9311-5BE14ACE8A99}"
+	ProjectSection(SolutionItems) = preProject
+		paket.dependencies = paket.dependencies
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
