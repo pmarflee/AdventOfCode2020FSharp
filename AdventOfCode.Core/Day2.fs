@@ -56,8 +56,10 @@ module Day2 =
             })
         ]
 
+        static let parser = RuntimeFarkle.build line
+
         static member parseLine input = 
-            match RuntimeFarkle.parseString (RuntimeFarkle.build line) input with
+            match RuntimeFarkle.parseString parser input with
             | Ok result -> result
             | Error err -> failwith (err.ToString())
 
