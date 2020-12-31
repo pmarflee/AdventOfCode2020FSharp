@@ -36,6 +36,8 @@ module Day3 =
             [|Tile.None; Tile.Tree; Tile.None; Tile.None; Tile.Tree; Tile.None; Tile.None; Tile.None; Tile.Tree; Tile.None; Tile.Tree|]
         |]
 
-        [<Fact>]
-        member _.``Day 3 Part 1 Calculate Should Produce Result Of 7`` () =
-            calculate 1 Tests.Input |> should equal 7
+        [<Theory>]
+        [<InlineData(1, 7)>]
+        [<InlineData(2, 336)>]
+        member _.``Day 3 Calculation Tests`` (part : int, expected : int) =
+            calculate part Tests.Input |> should equal expected
