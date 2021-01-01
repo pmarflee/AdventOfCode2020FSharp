@@ -37,7 +37,7 @@ module Day3 =
         |]
 
         [<Theory>]
-        [<InlineData(1, 7)>]
-        [<InlineData(2, 336)>]
-        member _.``Day 3 Calculation Tests`` (part : int, expected : int) =
+        [<InlineData(1, 7L)>]
+        [<InlineData(2, 336L)>]
+        member _.``Day 3 Calculation Tests`` (part : int, expected : int64) =
             calculate part Tests.Input |> should equal expected
