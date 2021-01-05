@@ -1,4 +1,4 @@
-﻿namespace AdventOfCode.Core
+﻿namespace AdventOfCode.Tests
 
 module Day3 =
 
