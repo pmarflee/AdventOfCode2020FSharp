@@ -16,11 +16,25 @@ module Day4 =
         | PassportID
         | CountryID
 
+    let requiredFields = [ BirthYear; 
+                           IssueYear; 
+                           ExpirationYear; 
+                           Height; 
+                           HairColor; 
+                           EyeColor; 
+                           PassportID; 
+                           CountryID ]
+
     type KeyValuePair = { Key : Field; Value : string; }
 
     type Passport = Passport of KeyValuePair list
+        with 
+        member this.IsValid = 
+            match this with
+            | Passport p -> requiredFields |> List.forall (fun f -> p |> List.exists (fun kv -> kv.Key = f))
+            
 
-    type Parser () =
+    type Day4Parser () =
 
         static let field =
             // Writing the field type as a nonterminal makes the parser more readable and case-insensitive.
@@ -64,3 +78,5 @@ module Day4 =
             match RuntimeFarkle.parseString runtime input with
             | Ok result -> result
             | Error err -> failwith (err.ToString())
+
+    let calculate input = Day4Parser.parse input |> Seq.where (fun p -> p.IsValid) |> Seq.length

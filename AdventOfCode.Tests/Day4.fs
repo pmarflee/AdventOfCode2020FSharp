@@ -8,10 +8,8 @@ module Day4 =
 
     type Tests ()=
 
-        static member ParseKeyValuePairsData
-            with get() = 
-            [ 
-                [|  "ecl:gry pid:860033327 eyr:2020 hcl:#fffffd\r\n\
+        static member Input
+            with get() = "ecl:gry pid:860033327 eyr:2020 hcl:#fffffd\r\n\
                      byr:1937 iyr:2017 cid:147 hgt:183cm\r\n\r\n\
                      iyr:2013 ecl:amb cid:350 eyr:2023 pid:028048884\r\n\
                      hcl:#cfa07d byr:1929\r\n\r\n\
@@ -20,7 +18,12 @@ module Day4 =
                      ecl:brn pid:760753108 byr:1931\r\n\
                      hgt:179cm\r\n\r\n\
                      hcl:#cfa07d eyr:2025 pid:166559648\r\n\
-                     iyr:2011 ecl:brn hgt:59in" :> obj; 
+                     iyr:2011 ecl:brn hgt:59in"
+
+        static member ParseKeyValuePairsData
+            with get() = 
+            [ 
+                [|  Tests.Input :> obj; 
                     [ Passport [ 
                         { Key = EyeColor; Value = "gry" };
                         { Key = PassportID; Value = "860033327" };
@@ -64,5 +67,8 @@ module Day4 =
         [<Theory>]
         [<MemberData(nameof Tests.ParseKeyValuePairsData)>]
         member _.``Day 4 Parse Input`` (input : string, expected : Passport list) =
-            Parser.parse input |> should equal expected
+            Day4Parser.parse input |> should equal expected
+
+        [<Fact>]
+        member _.``Day 4 Part 1`` () = calculate Tests.Input |> should equal 2
 
