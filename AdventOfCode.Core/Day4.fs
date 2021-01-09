@@ -22,8 +22,7 @@ module Day4 =
                            Height; 
                            HairColor; 
                            EyeColor; 
-                           PassportID; 
-                           CountryID ]
+                           PassportID; ]
 
     type KeyValuePair = { Key : Field; Value : string; }
 
@@ -79,4 +78,4 @@ module Day4 =
             | Ok result -> result
             | Error err -> failwith (err.ToString())
 
-    let calculate input = Day4Parser.parse input |> Seq.where (fun p -> p.IsValid) |> Seq.length
+    let calculate part input = Day4Parser.parse input |> Seq.where (fun p -> p.IsValid) |> Seq.length

@@ -70,5 +70,5 @@ module Day4 =
             Day4Parser.parse input |> should equal expected
 
         [<Fact>]
-        member _.``Day 4 Part 1`` () = calculate Tests.Input |> should equal 2
+        member _.``Day 4 Part 1`` () = calculate 1 Tests.Input |> should equal 2
 

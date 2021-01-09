@@ -9,6 +9,7 @@
     <Content Include="Day1.txt" />
     <Content Include="Day2.txt" />
     <Content Include="Day3.txt" />
+    <Content Include="Day4.txt" />
   </ItemGroup>
   <ItemGroup>
     <None Include="paket.references" />
