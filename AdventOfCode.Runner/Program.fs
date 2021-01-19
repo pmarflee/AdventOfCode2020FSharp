@@ -28,6 +28,7 @@ let main _ =
     run "Day 4 Part 2:" (read "Day4.txt") (Day4.calculate 2)
     run "Day 5 Part 1:" (readAllLines "Day5.txt") (Day5.calculate 1)
     run "Day 5 Part 2:" (readAllLines "Day5.txt") (Day5.calculate 2)
+    run "Day 6 Part 1:" (readAllLines "Day6.txt" |> List.ofArray) (Day6.calculate 1)
 
     printfn ""
     printfn "Finished"
