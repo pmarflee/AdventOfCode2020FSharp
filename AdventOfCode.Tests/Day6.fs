@@ -21,7 +21,10 @@ module Day6 =
                  a\r\n\
                  a\r\n\
                  a\r\n\r\n\
-                 b"
+                 b" |> splitLines |> List.ofArray
 
         [<Fact>]
-        member _.``Day 6 Part 1`` () = calculate 1 (splitLines Tests.Input |> List.ofArray) |> should equal 11
+        member _.``Day 6 Part 1`` () = calculate 1 Tests.Input |> should equal 11
+
+        [<Fact>]
+        member _.``Day 6 Part 2`` () = calculate 2 Tests.Input |> should equal 6
