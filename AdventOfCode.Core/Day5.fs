@@ -24,4 +24,13 @@ module Day5 =
 
         (finalState.RowFrom * 8) + finalState.ColumnFrom
 
-    let calculate part input = input |> Seq.map seatID |> Seq.max
+    let calculate part input = 
+        let seatIDs = input |> Seq.map seatID
+        match part with
+        | 1 -> seatIDs |> Seq.max
+        | 2 -> let allSeatIDs = Set.ofSeq seatIDs
+               let isInList seatID = Set.contains seatID allSeatIDs
+               let minSeatID = (Seq.min allSeatIDs) + 1
+               let maxSeatID = (Seq.max allSeatIDs) - 1
+               [ minSeatID .. maxSeatID ] |> List.find (fun seatID -> not (isInList seatID) && isInList (seatID - 1) && isInList (seatID + 1) )
+        | _ -> invalidArg (nameof part) "Invalid part. Should be 1 or 2"
