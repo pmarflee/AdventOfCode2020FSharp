@@ -29,23 +29,23 @@ module Day7 =
 
         static let colour =
             [
-                "light red", LightRed
-                "dark orange", DarkOrange
-                "bright white", BrightWhite
-                "muted yellow", MutedYellow
-                "shiny gold", ShinyGold
-                "dark olive", DarkOlive
-                "vibrant plum", VibrantPlum
-                "faded blue", FadedBlue
-                "dotted black", DottedBlack
+                "light", "red", LightRed
+                "dark", "orange", DarkOrange
+                "bright", "white", BrightWhite
+                "muted", "yellow", MutedYellow
+                "shiny", "gold", ShinyGold
+                "dark", "olive", DarkOlive
+                "vibrant", "plum", VibrantPlum
+                "faded", "blue", FadedBlue
+                "dotted", "black", DottedBlack
             ]
-            |> List.map (fun (name, x) -> !& name =% x)
+            |> List.map (fun (style, name, x) -> !& style .>> name =% x)
             |> (||=) "BagColour"
 
-        static let bagWord = regexString "bag(s)?" |> terminal "BagWord" (T(fun _ data -> data.ToString()))
+        static let bagWord = regexString "bag(s)?" |> terminalU "BagWord"
 
         static let bagType = "BagType" ||= [
-            !@ colour .>>. bagWord => (fun c _ -> c)
+            !@ colour .>> bagWord => id
         ]
 
         static let contentItem = "ContentItem" ||= [
@@ -57,6 +57,8 @@ module Day7 =
         static let line = "Line" ||= [
             !@ bagType .>> "contain" .>>. contents .>> "."
             => (fun t c -> { Type = t; Contents = c })
+            !@ bagType .>> "contain" .>> "no" .>> "other" .>> "bags"
+            => (fun t -> { Type = t; Contents = [] })
         ]
 
         static let lines = "Lines" ||= [
@@ -82,8 +84,8 @@ module Day7 =
 
         static member parseBagType input = Day7Parser.parse input bagTypeParser
 
-        static member parseContentItem input = Day7Parser.parse input contentItemParser 
+        static member parseContentItem input = Day7Parser.parse input contentItemParser
 
         static member parseContents input = Day7Parser.parse input contentsParser
 
-        static member parseLine input = Day7Parser.parse input lineParser 
+        static member parseLine input = Day7Parser.parse input lineParser
