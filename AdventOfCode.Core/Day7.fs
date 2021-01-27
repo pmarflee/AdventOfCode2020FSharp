@@ -44,6 +44,8 @@ module Day7 =
 
         static let bagWord = regexString "bag(s)?" |> terminalU "BagWord"
 
+        static let fullStop = literal "."
+
         static let bagType = "BagType" ||= [
             !@ colour .>> bagWord => id
         ]
@@ -57,7 +59,7 @@ module Day7 =
         static let line = "Line" ||= [
             !@ bagType .>> "contain" .>>. contents .>> "."
             => (fun t c -> { Type = t; Contents = c })
-            !@ bagType .>> "contain" .>> "no" .>> "other" .>> "bags"
+            !@ bagType .>> "contain" .>> "no" .>> "other" |> id .>> bagWord .>> fullStop
             => (fun t -> { Type = t; Contents = [] })
         ]
 

@@ -24,8 +24,15 @@ module Day7 =
             |> should equal [ { Type = BrightWhite; Units = 1 }; { Type = MutedYellow; Units = 2 } ]
 
         [<Fact>]
-        member _.``Day 7 Parse Line`` () = 
+        member _.``Day 7 Parse Line (bag with contents)`` () = 
             Day7Parser.parseLine "light red bags contain 1 bright white bag, 2 muted yellow bags." 
             |> should equal 
                 { Type = LightRed; 
                   Contents = [ { Type = BrightWhite; Units = 1 }; { Type = MutedYellow; Units = 2 } ] }
+
+        [<Fact>]
+        member _.``Day 7 Parse Line (bag with no contents)`` () = 
+            Day7Parser.parseLine "faded blue bags contain no other bags." 
+            |> should equal { Type = FadedBlue; Contents = [] }
+            Day7Parser.parseLine "dotted black bags contain no other bags." 
+            |> should equal { Type = DottedBlack; Contents = [] }
